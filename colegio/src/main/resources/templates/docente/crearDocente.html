@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{shared/layout}">
+<head th:replace="~{shared/layout :: head}">
+</head>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<body>
+    <nav th:replace="~{shared/layout :: sidebar}">
+    </nav>
+    <section class="home">
+        <div class="container">
+            <br>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col">
+                    <h1 class="titulo">NUEVO DOCENTE</h1>
+                </div>
+            </div>
+            <br>
+            <form th:object="${docente}" th:action="@{/docente/crear}" method="post">
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col">
+                    <label for="id" class="form-label label">Código de Docente:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-6">
+                    <input type="text" class="form-control input"  id="id"  th:field="*{id}" th:errorclass="is-invalid">
+                    <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="invalid-feedback"></div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col">
+                    <label for="nombres" class="form-label label">Nombres:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-6">
+                    <input type="text" class="form-control input"  id="nombres"  th:field="*{nombres}" th:errorclass="is-invalid">
+                    <div th:if="${#fields.hasErrors('nombres')}" th:errors="*{nombres}" class="invalid-feedback"></div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col">
+                    <label for="apePaterno" class="form-label label">Apellido Paterno:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-6">
+                    <input type="text" class="form-control input"  id="apePaterno"  th:field="*{apePaterno}" th:errorclass="is-invalid">
+                    <div th:if="${#fields.hasErrors('apePaterno')}" th:errors="*{apePaterno}" class="invalid-feedback"></div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col">
+                    <label for="apeMaterno" class="form-label label">Apellido Materno:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-6">
+                    <input type="text" class="form-control input"  id="apeMaterno"  th:field="*{apeMaterno}" th:errorclass="is-invalid">
+                    <div th:if="${#fields.hasErrors('apeMaterno')}" th:errors="*{apeMaterno}" class="invalid-feedback"></div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col">
+                    <label for="asignatura" class="form-label label">Asignatura que dicta:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-6">
+                    <select th:field="*{asignatura}" class="form-select combox" id="asignatura" th:errorclass="is-invalid">
+                        <option value="" selected>Selecciona una asignatura</option>
+                        <option th:each="a : ${asignaturas}" th:value="${a.id}" th:text="${a.descripcion}">
+                    </select>
+                    <div th:if="${#fields.hasErrors('asignatura')}" th:errors="*{asignatura}" class="invalid-feedback"></div>          
+                </div>
+            </div>
+            <br>
+            <br>    
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col">
+                    <input type="submit" class="btn btn-danger" value="GUARDAR">
+                </div>
+            </div>
+            </form>
+        </div>
+    </section>
+</body>

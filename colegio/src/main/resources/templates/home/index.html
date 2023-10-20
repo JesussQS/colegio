@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{shared/layout}">
+<head th:replace="~{shared/layout :: head}">
+</head>
+<body>
+    <div style="background-color: #53592D">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-3" >
+                    <img src="img/logoprg.jpg" class="img-fluid">
+                </div>
+                <div class="col text-end"><a th:href="@{/acceder}" class="btn btn-sm" style="background-color: #FFFFFF;">INICIAR SESIÓN</a></div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="//prg.edu.pe/wp-content/uploads/2023/05/banner_BANNER-WEB-21-21-21-scaled.jpg" class="d-block w-100" >
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <br>
+      <br>
+      <div class="container">
+        <div class="row">
+             <div class="col-6">
+                <div class="row">
+                    <div class="col">
+                        <h3>¡Bienvenidos al PRG!</h3>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <p>Somos una institución que busca formar estudiantes de manera integral, de pensamiento crítico, con valores y visión intercultural, capaces de contribuir a crear una sociedad más solidaria, justa y democrática.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p>Aspiramos a brindar un servicio educativo de excelencia, con estándares educativos internacionales, sólido en valores, desarrollando en los estudiantes competencias que promuevan la investigación, la innovación y el cuidado del medio ambiente, apoyados por una comunidad educativa comprometida con la mejora continua.</p>
+                    </div>
+                </div>
+                <br>
+                <div class="row align-items-center">
+                    <div class="col-md-4">
+                       <img src="https://prg.edu.pe/wp-content/uploads/2021/10/IB-5-anos.jpg" class="img-fluid"> 
+                    </div>
+                    <div class="col-md-4">
+                        <img src="https://prg.edu.pe/wp-content/uploads/2020/03/efqm3star-icon.png" class="img-fluid"> 
+                     </div>
+                     <div class="col-md-4">
+                        <img src="https://prg.edu.pe/wp-content/uploads/2020/03/cambridge-icon-1.png" class="img-fluid"> 
+                     </div>
+                </div>
+             </div>
+             <div class="col-6">
+                <div class="row">
+                    <div class="col text-center">
+                        <img src="https://prg.edu.pe/wp-content/uploads/2021/05/4.jpg" class="img-fluid" width="400px">
+                    </div>
+                </div>
+             </div>
+        </div>
+      </div>
+</body>
+<br>
+<footer>
+    <div style="background-color: #53592D;">
+        <br>
+        <div class="container text-center">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h6 style="color: white;">Copyright © 2018-2021 Pedro Ruiz Gallo.</h6>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+</footer>
+</html>

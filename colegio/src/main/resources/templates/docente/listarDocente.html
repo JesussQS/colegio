@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{shared/layout}">
+<head th:replace="~{shared/layout :: head}">
+</head>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<body>
+    <nav th:replace="~{shared/layout :: sidebar}">
+    </nav>
+    <section class="home">
+        <div class="container">
+            <br>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col">
+                    <h1 class="titulo">Docentes</h1>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col">
+                    <a class="btn btn-success" th:href="@{/docente/crear}">Nuevo Docente</a>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-10 text">
+                    <div class="activity">
+                        <div class="activity-data">
+                            <table id="table_id" class="display">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">CÓDIGO</th>
+                                        <th scope="col">NOMBRES</th>
+                                        <th scope="col">APELLIDO PATERNO</th>
+                                        <th scope="col">APELLIDO MATERNO</th>
+                                        <th scope="col">ASIGNATURA</th>      
+                                        <th scope="col">EDITAR</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="d:${docentes}">
+                                    <td class="text-center" th:text="${d.id}"></td>
+                                    <td class="text-center" th:text="${d.nombres}"></td>
+                                    <td class="text-center" th:text="${d.apePaterno}"></td>
+                                    <td class="text-center" th:text="${d.apeMaterno}"></td>
+                                    <td class="text-center" th:text="${d.asignatura.descripcion}"></td>
+                                    <td><a class="btn" style="background-color: #53592D;color: white;" th:href="@{/docente/actualizar/{id} (id=${d.id})}">Editar</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+	<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jquery-ui.min.js}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script th:src="@{/js/funciones.js}"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+        });
+    </script>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+            $('div.dataTables_filter input').addClass('datable');
+            $('div.dataTables_length select').addClass('combox');
+            $('div.dataTables_paginate a').addClass('boton');
+        });
+        $
+            .extend(
+                true,
+                $.fn.dataTable.defaults,
+                {
+                    "language": {
+                        "decimal": ",",
+                        "thousands": ".",
+                        "info": '<span class="datable">Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros</span>',
+                        "infoEmpty": '<span class="datable">Mostrando registros del 0 al 0 de un total de 0 registros</span>',
+                        "infoPostFix": "",
+                        "infoFiltered": '<span class="datable">(filtrado de un total de _MAX_ registros)</span>',
+                        "loadingRecords": "Cargando...",
+                        "lengthMenu": '<span class="datable">Mostrar _MENU_ registros</span>',
+                        "paginate": {
+                            "first": "Primero",
+                            "last": "Último",
+                            "next": '<span class="datable">Siguiente</span>',
+                            "previous": '<span class="datable">Anterior</span>'
+                        },
+                        "processing": "Procesando...",
+                        "search": '<span class="datable">Buscar:</span>',
+                        'searchPlaceholder': "Docente",
+                        "zeroRecords": "No se encontraron resultados",
+                        "emptyTable": "Ningún dato disponible en esta tabla",
+                        "aria": {
+                            "sortAscending": ": Activar para ordenar la columna de manera ascendente",
+                            "sortDescending": ": Activar para ordenar la columna de manera descendente"
+                        },
+                        //only works for built-in buttons, not for custom buttons
+                        "buttons": {
+                            "create": "Nuevo",
+                            "edit": "Cambiar",
+                            "remove": "Borrar",
+                            "copy": "Copiar",
+                            "csv": "fichero CSV",
+                            "excel": "tabla Excel",
+                            "pdf": "documento PDF",
+                            "print": "Imprimir",
+                            "colvis": "Visibilidad columnas",
+                            "collection": "Colección",
+                            "upload": "Seleccione fichero...."
+                        },
+                        "select": {
+                            "rows": {
+                                _: '%d filas seleccionadas',
+                                0: 'clic fila para seleccionar',
+                                1: 'una fila seleccionada'
+                            }
+                        }
+                    }
+                });
+    </script>
+</body>

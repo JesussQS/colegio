@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{shared/layout}">
+<head th:replace="~{shared/layout :: head}">
+</head>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<body>
+    <nav th:replace="~{shared/layout :: sidebar}">
+    </nav>
+    <section class="home">
+        <div class="container">
+            <br>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col">
+                    <h1 class="titulo">ACTUALIZAR ASIGNATURA</h1>
+                </div>
+            </div>
+            <br>
+            <form th:object="${asignatura}" th:action="@{/asignatura/actualizar}" method="post">
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col">
+                    <label for="id" class="form-label label">CÓDIGO DE ASIGNATURA</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-6">
+                    <input th:readonly="${true}" class="form-control input"  id="id"  th:field="*{id}" th:errorclass="is-invalid">
+                    <div th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="invalid-feedback"></div>
+                </div>
+            </div>
+            <br>
+            <br>    
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col">
+                    <label for="descripcion" class="form-label label">Descripción</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col-6">
+                    <input type="text" class="form-control input"  id="decripcion"  th:field="*{descripcion}" th:errorclass="is-invalid">
+                    <div th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}" class="invalid-feedback"></div>
+                </div>
+            </div>
+            <br>
+            <br>
+            
+            <div class="row">
+                <div class="col-1">
+                </div>
+                <div class="col">
+                    <input type="submit" class="btn btn-danger" value="GUARDAR CAMBIOS">
+                </div>
+            </div>
+            </form>
+        </div>
+    </section>
+</body>
