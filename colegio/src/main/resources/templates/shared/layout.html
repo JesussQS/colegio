@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title>IE PEDRO RUIZ GALLO</title>
+    <link rel="icon" href="https://prg.edu.pe/wp-content/uploads/2020/03/cropped-cropped-Logo-calidad-32x32.png" sizes="32x32">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div th:fragment="sidebar">
+        <link rel="stylesheet" th:href="@{/css/admin.css}">
+        <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+        
+        <nav class="sidebar open border-end">
+            <header>
+                <div class="image-text">
+                    <span class="image">
+                        <img  src="https://scontent.flim38-1.fna.fbcdn.net/v/t39.30808-6/348570546_908603387032428_1220882809468786453_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeEfwdyec8EuynM2d-OOmYhwut2r9yeX3fm63av3J5fd-TkowACq_-_3D-jEds_e1M_EDsyR0RRfmEAmX3h2vbG-&_nc_ohc=1BQ5ATdY7xUAX8tI8bJ&_nc_ht=scontent.flim38-1.fna&oh=00_AfBBAzFvgIUHwSLLVm-7wsSfSkFIEFgxaTw3AZ7rb2kDyA&oe=65377976">
+                    </span>
+    
+                    <div class="text logo-text">
+                        <span class="name">IE PEDRO</span>
+                        <span class="name">RUIZ GALLO</span>
+                    </div>
+                </div>
+    
+            </header>
+    
+            <div class="menu-bar">
+                <div class="menu">
+                    <li class="search-box">
+                        <i class='bx bx-search icon'></i>
+                        <input type="text" placeholder="Buscar">
+                    </li>
+    
+                    <ul class="menu-links">
+                        <li class="nav-link">
+                            <a th:href="@{/asignatura/listar}">
+                                <i class='bx bx-food-menu icon' ></i>
+                                <span class="text nav-text">Asignatura</span>
+                            </a>
+                        </li>
+    
+                        <li class="nav-link">
+                            <a th:href="@{/docente/listar}">
+                                <i class='bx bx-male-female icon' ></i>
+                                <span class="text nav-text">Docente</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+    
+                <div class="bottom-content">
+                    <li class="">
+                        <a th:href="@{/acceder/cerrar}">
+                            <i class='bx bx-log-out icon' ></i>
+                            <span class="text nav-text">Salir</span>
+                        </a>
+                    </li>
+    
+                    <li class="mode">
+                        <div class="sun-moon">
+                            <i class='bx bx-moon icon moon'></i>
+                            <i class='bx bx-sun icon sun'></i>
+                        </div>
+                        <span class="mode-text text">Dark mode</span>
+    
+                        <div class="toggle-switch">
+                            <span class="switch"></span>
+                        </div>
+                    </li>
+                    
+                </div>
+            </div>
+        </nav>
+    
+        <script>
+            body = document.querySelector('body'),
+            sidebar = body.querySelector('nav'),
+            toggle = body.querySelector(".toggle"),
+            searchBtn = body.querySelector(".search-box"),
+            modeSwitch = body.querySelector(".toggle-switch"),
+            modeText = body.querySelector(".mode-text");
+
+            searchBtn.addEventListener("click" , () =>{
+                sidebar.classList.remove("close");
+            })
+    
+            modeSwitch.addEventListener("click" , () =>{
+                body.classList.toggle("dark");
+                
+                if(body.classList.contains("dark")){
+                    modeText.innerText = "Light mode";
+                }else{
+                    modeText.innerText = "Dark mode";
+                    
+                }
+            });
+        </script>
+    </div>
+</body>
+</html>

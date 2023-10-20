@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{shared/layout}">
+<head th:replace="~{shared/layout :: head}">
+</head>
+<body>
+    <div style="background-color: #53592D">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-3" >
+                    <img src="img/logoprg.jpg" class="img-fluid">
+                </div>
+                <div class="col text-end"><a th:href="@{/}" class="btn btn-sm" style="background-color: #FFFFFF;">VOLVER</a></div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="row" style="min-height: 80vh">
+            <div class="col-6 text-center">
+                <div class="row align-items-center" style="min-height: 80vh">
+                    <div class="row">
+                        <div class="col">
+                            <img  class="img-fluid" width="500px" src="https://scontent.flim38-1.fna.fbcdn.net/v/t39.30808-6/348570546_908603387032428_1220882809468786453_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeEfwdyec8EuynM2d-OOmYhwut2r9yeX3fm63av3J5fd-TkowACq_-_3D-jEds_e1M_EDsyR0RRfmEAmX3h2vbG-&_nc_ohc=1BQ5ATdY7xUAX8tI8bJ&_nc_ht=scontent.flim38-1.fna&oh=00_AfBBAzFvgIUHwSLLVm-7wsSfSkFIEFgxaTw3AZ7rb2kDyA&oe=65377976">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div style="font-family: Inter;">INSTITUTO EDUCATIVO</div>
+                            <div style="font-family: Inter;">PEDRO RUIZ GALLO</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="row align-items-center border-top border-start border-end border-dark" style="min-height: 20vh">
+                    <div class="col text-center">
+                        <h4>¡BIENVENIDO!</h4>
+                    </div>
+                </div>
+                <div class="row border-bottom border-start border-end border-dark" style="min-height: 60vh">
+                    <div class="col-2">
+                    </div>
+                    <div class="col">
+                        <form th:object="${administrador}" th:action="@{/acceder}" method="post">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="email" class="form-label">Correo</label>
+                                    <input type="text" class="form-control" th:field="*{email}" id="email" th:errorclass="is-invalid">
+                                    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="invalid-feedback"></div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col">
+                                <label for="password" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" th:field="*{password}" id="password" th:errorclass="is-invalid">
+                                <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="invalid-feedback"></div>
+                                <div th:if="${errorAutenticacion!=null}">
+                                    <br>
+                                    <div class="text-danger text-center" th:text="${errorAutenticacion}"></div>
+                                </div>
+                                </div>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="d-grid gap-2">
+                                    <input type="submit" class="btn" style="background-color: #53592D;color: #FFFFFF;"  value="INGRESAR">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-2">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <footer>
+        <div style="background-color: #53592D;">
+            <br>
+            <div class="container text-center">
+                <div class="row align-items-end">
+                    <div class="col">
+                        <h6 style="color: white;">Copyright © 2018-2021 Pedro Ruiz Gallo.</h6>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+    </footer>
+</body>
+</html>
