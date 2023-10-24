@@ -10,7 +10,6 @@
         <div class="container">
             <br>
             <br>
-            <br>
             <div class="row">
                 <div class="col-1">
                 </div>
@@ -19,7 +18,7 @@
                 </div>
             </div>
             <br>
-            <form th:object="${asignatura}" th:action="@{/asignatura/actualizar}" method="post">
+            <form th:object="${asignatura}" th:action="@{/asignatura/actualizar/{id} (id=${id})}" method="post">
             <div class="row">
                 <div class="col-1">
                 </div>

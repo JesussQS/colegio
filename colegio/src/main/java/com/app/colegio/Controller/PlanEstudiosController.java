@@ -1,7 +1,6 @@
 package com.app.colegio.Controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.app.colegio.Model.AnioAcademico;
@@ -46,31 +46,78 @@ public class PlanEstudiosController {
     @GetMapping("/crear")
     public String crear(HttpSession session, Map<String, Object> model) {
         if (session.getAttribute("usuario") != null) {
-            AnioAcademico anioAcademico = new AnioAcademico();
-            List<Asignatura> asignatura = asignaturaRepository.findAll();
-            model.put("anioAcademico", anioAcademico);
-            model.put("asignaturaList", asignatura);
+            LocalDate fechaActual = LocalDate.now();
+            String anio=fechaActual.getYear()+"";
+            List<Asignatura> asignaturas = asignaturaRepository.findAll();
+            Integer[]horas=new Integer[9];
+            model.put("asignaturas", asignaturas);
+            model.put("anio",anio);
+            model.put("horas", horas);
             return "plan/crearPlan";
         } else {
             return "redirect:/acceder";
         }
     }
 
-    @GetMapping("/ver/{id_AnioAcademico}")
-    public String ver(HttpSession session, @PathVariable String idAnioAcademico, Map<String, Object> model) {
+    @PostMapping("/crear")
+    public String guardar(HttpSession session, Map<String, Object> model,Integer horas[]){
         if (session.getAttribute("usuario") != null) {
-            AnioAcademico anioAcademico = anioAcademicoRepository.findById(idAnioAcademico).orElse(null);
-            if (anioAcademico != null) {
-                model.put("anioAcademico", anioAcademico);
-                List<PlanEstudios> planes = planEstudiosRepository.findByAnioAcademico(anioAcademico);
-                List<Map<String, Object>> asignaturasConHoras = new ArrayList<>();
-                for (PlanEstudios plan : planes) {
-                    Map<String, Object> asignaturaConHoras = new HashMap<>();
-                    asignaturaConHoras.put("asignatura", plan.getAsignatura());
-                    asignaturaConHoras.put("horasSemanales", plan.getHorasSemanales());
-                    asignaturasConHoras.add(asignaturaConHoras);
+
+            Boolean flag=false;
+            LocalDate fechaActual = LocalDate.now();
+            String anio=fechaActual.getYear()+"";
+            List<Asignatura> asignaturas = asignaturaRepository.findAll();
+
+            for(int i=0;horas.length>i;i++){
+                if(horas[i]==null){
+                    flag=true;
+                }else{
+                    if(horas[i]<2 || horas[i]>4){
+                        flag=true;
+                    }
                 }
-                model.put("asignaturasConHoras", asignaturasConHoras);
+            }
+            if(flag){
+                model.put("asignaturas", asignaturas);
+                model.put("anio",anio);
+                model.put("horas", horas);
+                model.put("alertaCampos", "Todos los campos son obligatorios y el rango debe estar entre 2 y 4");
+                return "plan/crearPlan";
+            }else{
+                AnioAcademico anioAcademico=new AnioAcademico();
+                anioAcademico.setId(anio);
+                if(!anioAcademicoRepository.findById(anio).isPresent()){
+                    anioAcademicoRepository.save(anioAcademico);
+                    for(int i=0;horas.length>i;i++){
+                        PlanEstudios planEstudios=new PlanEstudios();
+                        planEstudios.setAnioAcademico(anioAcademico);
+                        planEstudios.setAsignatura(asignaturas.get(i));
+                        planEstudios.setHorasSemanales(horas[i]);
+                        planEstudiosRepository.save(planEstudios);
+                    }
+                    return "redirect:/plan/listar";
+                }else{
+                    model.put("asignaturas", asignaturas);
+                    model.put("anio",anio);
+                    model.put("horas", horas);
+                    model.put("alertaCampos", "EL plan de estudios actual ya existe");
+                    return "plan/crearPlan";
+                }
+            }
+            
+        } else {
+            return "redirect:/acceder";
+        }
+    }
+
+    @GetMapping("/ver/{id}")
+    public String ver(HttpSession session, @PathVariable String id, Map<String, Object> model) {
+        if (session.getAttribute("usuario") != null) {
+            AnioAcademico anioAcademico = anioAcademicoRepository.findById(id).orElse(null);
+            if (anioAcademico != null) {
+                List<PlanEstudios> anioPlanes = planEstudiosRepository.findByAnioAcademico(anioAcademico);
+                model.put("anioAcademico", anioAcademico);
+                model.put("anioPlanes",anioPlanes);
                 return "plan/verPlan";
             } else {
                 return "redirect:/plan/listar";
