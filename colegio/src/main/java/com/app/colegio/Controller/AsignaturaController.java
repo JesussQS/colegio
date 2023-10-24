@@ -83,8 +83,8 @@ public class AsignaturaController {
         }
     }
 
-    @PostMapping("/actualizar")
-    public String guardarCambios(HttpSession session, @Valid Asignatura asignatura, BindingResult bindingResult,
+    @PostMapping("/actualizar/{id}")
+    public String guardarCambios(HttpSession session,@PathVariable String id ,@Valid Asignatura asignatura, BindingResult bindingResult,
             Map<String, Object> model) {
         if (session.getAttribute("usuario") != null) {
             if (bindingResult.hasErrors()) {
